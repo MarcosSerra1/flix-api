@@ -5,7 +5,7 @@ from genres.models import Genre
 
 
 @csrf_exempt
-def genre_view(request):
+def genre_create_list_view(request):
     if request.method == 'GET':
         genres = Genre.objects.all()
         data = [{'id': genre.id, 'name': genre.name} for genre in genres]

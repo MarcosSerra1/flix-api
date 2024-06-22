@@ -1,6 +1,6 @@
 # Projeto de API com Django
 
-Este projeto é uma API desenvolvida apenas com Django, sem o uso do Django REST Framework (DRF). Ele demonstra como criar endpoints de API básicos utilizando as funcionalidades nativas do Django.
+Este projeto é uma API desenvolvida apenas com Django, como parte do curso "Django Master" ministrado pelo professor Felipe Azambuja da PycodeBR. A API não utiliza Django REST Framework (DRF) e demonstra como criar endpoints de API básicos utilizando as funcionalidades nativas do Django.
 
 ## Estrutura do Projeto
 

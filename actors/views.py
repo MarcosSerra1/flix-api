@@ -1,16 +1,16 @@
 from rest_framework import generics
-from actors.models import Actors
+from actors.models import Actor
 from actors.serializers import ActorSerializer
 from django.http import JsonResponse
 
 
 class ActorCreateListView(generics.ListCreateAPIView):
-    queryset = Actors.objects.all()
+    queryset = Actor.objects.all()
     serializer_class = ActorSerializer
 
 
 class ActorRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Actors.objects.all()
+    queryset = Actor.objects.all()
     serializer_class = ActorSerializer
 
     def delete(self, *args, **kwargs):

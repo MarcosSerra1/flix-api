@@ -1,7 +1,7 @@
 from django.contrib import admin
-from actors.models import Actors
+from actors.models import Actor
 
 
-@admin.register(Actors)
+@admin.register(Actor)
 class ActorAdmin(admin.ModelAdmin):
     list_display = ('id', 'name', 'birthday', 'nationality')

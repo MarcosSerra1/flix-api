@@ -1,11 +1,14 @@
 # Projeto de API com Django
+
 Este projeto é uma API desenvolvida com Django e Django REST Framework (DRF), como parte do curso "Django Master" ministrado pelo professor Felipe Azambuja da PycodeBR. A API utiliza Django e DRF e demonstra como criar endpoints de API utilizando as funcionalidades do DRF.
 
 ## Estrutura do Projeto
-- app/: Diretório do projeto principal Django.
-- genres/: Aplicativo Django responsável por gerenciar gêneros.
-- actors/: Aplicativo Django responsável por gerenciar atores.
-- requirements.txt: Arquivo contendo as dependências do projeto.
+
+- `app/`: Diretório do projeto principal Django.
+- `genres/`: Aplicativo Django responsável por gerenciar gêneros.
+- `actors/`: Aplicativo Django responsável por gerenciar atores.
+- `movies/`: Aplicativo Django responsável por gerenciar filmes.
+- `requirements.txt`: Arquivo contendo as dependências do projeto.
 
 ## Configuração Inicial
 
@@ -14,22 +17,26 @@ Este projeto é uma API desenvolvida com Django e Django REST Framework (DRF), c
    ```bash
    git clone https://github.com/MarcosSerra1/flix-api.git
    ```
+
 2. Crie e ative um ambiente virtual:
 
    ```bash
    python -m venv venv
    source venv/bin/activate  # No Windows, use `venv\Scripts\activate`
    ```
+
 3. Instale as dependências:
 
    ```bash
    pip install -r requirements.txt
    ```
+
 4. Aplique as migrações do banco de dados:
 
    ```bash
    python manage.py migrate
    ```
+
 5. Inicie o servidor de desenvolvimento:
 
    ```bash
@@ -84,7 +91,7 @@ Atualiza os detalhes de um gênero específico.
 
 Exclui um gênero específico.
 
-Retorna uma mensagem de sucesso ou erro
+**Resposta de Sucesso:**
 
 ```json
 {
@@ -92,11 +99,11 @@ Retorna uma mensagem de sucesso ou erro
 }
 ```
 
-ou
+**Resposta de Erro:**
 
 ```json
 {
-    "error": "Error"
+    "error": "Erro"
 }
 ```
 
@@ -118,10 +125,11 @@ from django.urls import path
 from genres.views import GenreCreateListView, GenreRetrieveUpdateDestroyView
 
 urlpatterns = [
-    path('genres/', GenreCreateListView, name='genre'),
-    path('genres/<int:pk>/', GenreRetrieveUpdateDestroyView, name='genre-detail-view'),
+    path('genres/', GenreCreateListView.as_view(), name='genre'),
+    path('genres/<int:pk>/', GenreRetrieveUpdateDestroyView.as_view(), name='genre-detail-view'),
 ]
 ```
+
 ---
 
 ### Listar e Criar Atores
@@ -149,7 +157,7 @@ Cria um novo ator.
 
 ### Detalhar, Atualizar e Excluir Ator
 
-- **URL:** `/genres/<int:pk>/`
+- **URL:** `/actors/<int:pk>/`
 - **Métodos Suportados:** `GET`, `PUT`, `DELETE`
 
 #### GET
@@ -165,7 +173,7 @@ Atualiza os detalhes de um ator específico.
 ```json
 {
     "name": "Nome Atualizado do Ator",
-    "birthday": "Data de Nascimento Atualizado do Ator",
+    "birthday": "Data de Nascimento Atualizada do Ator",
     "nationality": "País de Nascimento Atualizado do Ator"
 }
 ```
@@ -174,7 +182,7 @@ Atualiza os detalhes de um ator específico.
 
 Exclui um ator específico.
 
-Retorna uma mensagem de sucesso ou erro
+**Resposta de Sucesso:**
 
 ```json
 {
@@ -182,11 +190,11 @@ Retorna uma mensagem de sucesso ou erro
 }
 ```
 
-ou
+**Resposta de Erro:**
 
 ```json
 {
-    "error": "Error"
+    "error": "Erro"
 }
 ```
 
@@ -210,6 +218,101 @@ from actors.views import ActorCreateListView, ActorRetrieveUpdateDestroyView
 urlpatterns = [
     path('actors/', ActorCreateListView.as_view(), name='actor-create-list'),
     path('actors/<int:pk>/', ActorRetrieveUpdateDestroyView.as_view(), name='actor-detail-view'),
+]
+```
+
+---
+
+### Listar e Criar Filmes
+
+- **URL:** `/movies/`
+- **Métodos Suportados:** `GET`, `POST`
+
+#### GET
+
+Retorna uma lista de todos os filmes.
+
+#### POST
+
+Cria um novo filme.
+
+**Exemplo de Corpo de Requisição (POST):**
+
+```json
+{
+    "title": "Nome do Filme",
+    "release_date": "Data de lançamento do Filme",
+    "resume": "Sinopse do Filme",
+    "genre": "Gênero do Filme",
+    "actors": ["Lista com nomes dos Atores do Filme"]
+}
+```
+
+### Detalhar, Atualizar e Excluir Filme
+
+- **URL:** `/movies/<int:pk>/`
+- **Métodos Suportados:** `GET`, `PUT`, `DELETE`
+
+#### GET
+
+Retorna os detalhes de um filme específico.
+
+#### PUT
+
+Atualiza os detalhes de um filme específico.
+
+**Exemplo de Corpo de Requisição (PUT):**
+
+```json
+{
+    "title": "Nome do Filme Atualizado",
+    "release_date": "Data de lançamento do Filme Atualizado",
+    "resume": "Sinopse do Filme Atualizado",
+    "genre": "Gênero do Filme Atualizado",
+    "actors": ["Lista com nomes dos Atores do Filme Atualizado"]
+}
+```
+
+#### DELETE
+
+Exclui um filme específico.
+
+**Resposta de Sucesso:**
+
+```json
+{
+    "message": "Filme deletado com sucesso."
+}
+```
+
+**Resposta de Erro:**
+
+```json
+{
+    "error": "Erro"
+}
+```
+
+## Arquivos Importantes
+
+### `movies/views.py`
+
+Contém as views para os endpoints da API:
+
+- `MovieCreateListView`: Gerencia requisições GET para listar filmes e POST para criar novos filmes.
+- `MovieRetrieveUpdateDestroyView`: Gerencia requisições GET para detalhar, PUT para atualizar e DELETE para excluir filmes específicos.
+
+### `movies/urls.py`
+
+Define as rotas para os endpoints da API:
+
+```python
+from django.urls import path
+from movies.views import MovieCreateListView, MovieRetrieveUpdateDestroyView
+
+urlpatterns = [
+    path('movies/', MovieCreateListView.as_view(), name='movies-create-list'),
+    path('movies/<int:pk>/', MovieRetrieveUpdateDestroyView.as_view(), name='movies-detail-view'),
 ]
 ```
 

@@ -123,11 +123,11 @@ Define as rotas para os endpoints da API:
 
 ```python
 from django.urls import path
-from genres.views import GenreCreateListView, GenreRetrieveUpdateDestroyView
+from . import views
 
 urlpatterns = [
-    path('genres/', GenreCreateListView.as_view(), name='genre-create-list'),
-    path('genres/<int:pk>/', GenreRetrieveUpdateDestroyView.as_view(), name='genre-detail-view'),
+    path('genres/', views.GenreCreateListView.as_view(), name='genre-create-list'),
+    path('genres/<int:pk>/', views.GenreRetrieveUpdateDestroyView.as_view(), name='genre-detail-view'),
 ]
 ```
 
@@ -214,11 +214,11 @@ Define as rotas para os endpoints da API:
 
 ```python
 from django.urls import path
-from actors.views import ActorCreateListView, ActorRetrieveUpdateDestroyView
+from . import views
 
 urlpatterns = [
-    path('actors/', ActorCreateListView.as_view(), name='actor-create-list'),
-    path('actors/<int:pk>/', ActorRetrieveUpdateDestroyView.as_view(), name='actor-detail-view'),
+    path('actors/', views.ActorCreateListView.as_view(), name='actor-create-list'),
+    path('actors/<int:pk>/', views.ActorRetrieveUpdateDestroyView.as_view(), name='actor-detail-view'),
 ]
 ```
 
@@ -309,11 +309,11 @@ Define as rotas para os endpoints da API:
 
 ```python
 from django.urls import path
-from movies.views import MovieCreateListView, MovieRetrieveUpdateDestroyView
+from . import views
 
 urlpatterns = [
-    path('movies/', MovieCreateListView.as_view(), name='movies-create-list'),
-    path('movies/<int:pk>/', MovieRetrieveUpdateDestroyView.as_view(), name='movies-detail-view'),
+    path('movies/', views.MovieCreateListView.as_view(), name='movies-create-list'),
+    path('movies/<int:pk>/', views.MovieRetrieveUpdateDestroyView.as_view(), name='movies-detail-view'),
 ]
 ```
 
@@ -400,11 +400,11 @@ Define as rotas para os endpoints da API:
 
 ```python
 from django.urls import path
-from reviews.views import ReviewCreateListView, ReviewRetrieveUpdateDestroyView
+from . import views
 
 urlpatterns = [
-    path('reviews/', ReviewCreateListView.as_view(), name='review-create-list'),
-    path('reviews/<int:pk>/', ReviewRetrieveUpdateDestroyView.as_view(), name='review-detail-view'),
+    path('reviews/', views.ReviewCreateListView.as_view(), name='review-create-list'),
+    path('reviews/<int:pk>/', views.ReviewRetrieveUpdateDestroyView.as_view(), name='review-detail-view'),
 ]
 ```
 

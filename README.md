@@ -360,9 +360,7 @@ Atualiza os detalhes de um review específico.
 ```json
 {
     "stars": "Quantidade de estrelas para o filme atualizado",
-    "comment": "Comentário para o filme
-
- atualizado",
+    "comment": "Comentário para o filme atualizado",
     "movie": "Filme atualizado"
 }
 ```

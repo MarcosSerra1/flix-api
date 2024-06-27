@@ -8,6 +8,7 @@ Este projeto é uma API desenvolvida com Django e Django REST Framework (DRF), c
 - `genres/`: Aplicativo Django responsável por gerenciar gêneros.
 - `actors/`: Aplicativo Django responsável por gerenciar atores.
 - `movies/`: Aplicativo Django responsável por gerenciar filmes.
+- `reviews/`: Aplicativo Django responsável por gerenciar reviews.
 - `requirements.txt`: Arquivo contendo as dependências do projeto.
 
 ## Configuração Inicial
@@ -313,6 +314,99 @@ from movies.views import MovieCreateListView, MovieRetrieveUpdateDestroyView
 urlpatterns = [
     path('movies/', MovieCreateListView.as_view(), name='movies-create-list'),
     path('movies/<int:pk>/', MovieRetrieveUpdateDestroyView.as_view(), name='movies-detail-view'),
+]
+```
+
+---
+
+### Listar e Criar Reviews
+
+- **URL:** `/reviews/`
+- **Métodos Suportados:** `GET`, `POST`
+
+#### GET
+
+Retorna uma lista de todos os reviews.
+
+#### POST
+
+Cria um novo review.
+
+**Exemplo de Corpo de Requisição (POST):**
+
+```json
+{
+    "stars": "Quantidade de estrelas para o filme",
+    "comment": "Comentário para o filme",
+    "movie": "Filme"
+}
+```
+
+### Detalhar, Atualizar e Excluir Review
+
+- **URL:** `/reviews/<int:pk>/`
+- **Métodos Suportados:** `GET`, `PUT`, `DELETE`
+
+#### GET
+
+Retorna os detalhes de um review específico.
+
+#### PUT
+
+Atualiza os detalhes de um review específico.
+
+**Exemplo de Corpo de Requisição (PUT):**
+
+```json
+{
+    "stars": "Quantidade de estrelas para o filme atualizado",
+    "comment": "Comentário para o filme
+
+ atualizado",
+    "movie": "Filme atualizado"
+}
+```
+
+#### DELETE
+
+Exclui um review específico.
+
+**Resposta de Sucesso:**
+
+```json
+{
+    "message": "Review deletado com sucesso."
+}
+```
+
+**Resposta de Erro:**
+
+```json
+{
+    "error": "Erro"
+}
+```
+
+## Arquivos Importantes
+
+### `reviews/views.py`
+
+Contém as views para os endpoints da API:
+
+- `ReviewCreateListView`: Gerencia requisições GET para listar reviews e POST para criar novos reviews.
+- `ReviewRetrieveUpdateDestroyView`: Gerencia requisições GET para detalhar, PUT para atualizar e DELETE para excluir reviews específicos.
+
+### `reviews/urls.py`
+
+Define as rotas para os endpoints da API:
+
+```python
+from django.urls import path
+from reviews.views import ReviewCreateListView, ReviewRetrieveUpdateDestroyView
+
+urlpatterns = [
+    path('reviews/', ReviewCreateListView.as_view(), name='review-create-list'),
+    path('reviews/<int:pk>/', ReviewRetrieveUpdateDestroyView.as_view(), name='review-detail-view'),
 ]
 ```
 

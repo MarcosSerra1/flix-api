@@ -18,7 +18,7 @@ class ReviewRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
         try: 
             instance.delete()
             return JsonResponse(
-                {'message': 'Filme deletado com sucesso.'}, 
+                {'message': 'Review deletado com sucesso.'}, 
                 status=204
             )
         
